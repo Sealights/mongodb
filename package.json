@@ -1,5 +1,5 @@
 {
-  "name": "db-migrate-mongodb-nesto-fork",
+  "name": "@sealights/db-migrate-mongodb",
   "version": "2.0.1",
   "description": "Mongodb driver for db-migrate. This is a fork which updated the mongo dependencies in order to support replica sets with srv records.",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/db-migrate/mongodb.git"
+    "url": "https://github.com/Sealights/mongodb.git"
   },
   "keywords": [
     "db-migrate",
@@ -18,16 +18,16 @@
     "migration",
     "driver"
   ],
-  "author": "Tobias Gurtzick <magic@wizardtales.com>",
+  "author": "Shai Cantor",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/db-migrate/mongodb/issues"
+    "url": "https://github.com/Sealights/mongodb/issues"
   },
-  "homepage": "https://github.com/db-migrate/mongodb",
+  "homepage": "https://github.com/Sealights/mongodb",
   "dependencies": {
     "bluebird": "^3.5.3",
     "db-migrate-base": "^1.5.3",
-    "mongodb": "^3.1"
+    "mongodb": "^3.1.13"
   },
   "devDependencies": {
     "db-meta": "^0.4.1",
