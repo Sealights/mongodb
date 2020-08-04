@@ -1,6 +1,6 @@
 {
   "name": "@sealights/db-migrate-mongodb",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Mongodb driver for db-migrate. This is a fork which updated the mongo dependencies in order to support replica sets with srv records.",
   "main": "index.js",
   "scripts": {
@@ -33,5 +33,12 @@
     "db-meta": "^0.4.1",
     "db-migrate-shared": "^1.1.2",
     "vows": "0.8.2"
-  }
+  },
+  "files": [
+    "index.js",
+    "CHANGELOG.md",
+    "LICENSE",
+    "package-lock.json",
+    "README.md"
+  ]
 }
