@@ -39,6 +39,7 @@ pipeline {
 					env.IS_PR = env.BRANCH_NAME.startsWith('PR-') ? "true" : "false"
 					if (env.IS_PR == "false")
 						env.CHANGE_BRANCH = env.BRANCH_NAME
+					tools.set_npm_registries()
 					sh "npm install && npm pack"
 				}
 			}
