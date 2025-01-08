@@ -32,27 +32,37 @@ pipeline {
 		TZ = "Asia/Jerusalem"
 	}
 	stages {
-		stage('Init') {
-			steps {
-				script {
-					env.CURRENT_VERSION = "${params.BASE_VERSION}.${env.BUILD_NUMBER}-${env.BRANCH_NAME}".replace("/", "-")
-					env.IS_PR = env.BRANCH_NAME.startsWith('PR-') ? "true" : "false"
-					if (env.IS_PR == "false")
-						env.CHANGE_BRANCH = env.BRANCH_NAME
-					tools.set_npm_registries()
-					sh "npm install && npm pack"
+		stage("MongoDB Migration CI") {
+			when {
+				anyOf {
+					changeRequest()
+					branch 'master'
 				}
 			}
-		}
-		stage('Publish') {
-			steps {
-				script {
-					sh "npm version ${CURRENT_VERSION} --no-git-tag-version"
-					if ("${GIT_BRANCH}" == "master") {
-						env.CURRENT_VERSION = env.CURRENT_VERSION.replace("-${env.BRANCH_NAME}", "")
-						sh "npm publish --tag master"
-					} else {
-						sh "npm publish --tag " + env.CHANGE_BRANCH.replace('/', '-')
+			stages {
+				stage('Init') {
+					steps {
+						script {
+							env.CURRENT_VERSION = "${params.BASE_VERSION}.${env.BUILD_NUMBER}-${env.BRANCH_NAME}".replace("/", "-")
+							env.IS_PR = env.BRANCH_NAME.startsWith('PR-') ? "true" : "false"
+							if (env.IS_PR == "false")
+								env.CHANGE_BRANCH = env.BRANCH_NAME
+							tools.set_npm_registries()
+							sh "npm install && npm pack"
+						}
+					}
+				}
+				stage('Publish') {
+					steps {
+						script {
+							sh "npm version ${CURRENT_VERSION} --no-git-tag-version"
+							if ("${GIT_BRANCH}" == "master") {
+								env.CURRENT_VERSION = env.CURRENT_VERSION.replace("-${env.BRANCH_NAME}", "")
+								sh "npm publish --tag master"
+							} else {
+								sh "npm publish --tag " + env.CHANGE_BRANCH.replace('/', '-')
+							}
+						}
 					}
 				}
 			}
